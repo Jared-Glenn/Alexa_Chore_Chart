@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# This is a High Low Guess game Alexa Skill.
+# This is a Chore Chart Alexa Skill.
 # The skill serves as a simple sample on how to use the
 # persistence attributes and persistence adapter features in the SDK.
 import random
@@ -35,12 +35,19 @@ def launch_request_handler(handler_input):
     # type: (HandlerInput) -> Response
     attr = handler_input.attributes_manager.persistent_attributes
     if not attr:
+        # JG Altered 5-12-22 and 5-13-22
         attr ['original_date'] = date(2022, 4, 8)
-        attr['ended_session_count'] = 0
-        attr['chores_requested'] = 0
-        attr['game_state'] = 'ENDED'
+        attr['today'] = date.today()
+        attr['day_difference'] = (today - original_date).days
+        attr['day_mod_0'] = 'feed the cat, empty the surprise box,'
+        attr['day_mod_1'] = 'clean the front room, do an extra chore for Mom,'
+        attr['day_mod_2'] = 'unload and load the dishwasher,'
+        attr['day_mod_3'] = 'clean the bathroom, set the table, clean the table,'
 
     handler_input.attributes_manager.session_attributes = attr
+    # JG Added 5-13-22
+    session_attr = handler_input.attributes_manager.session_attributes
+    session_attr['day_modifier'] = "STARTED"
 
     speech_text = (
         "Hey there! Is it chore time again? The day you built this was on {}.".format(attr["original_date"]))
@@ -140,42 +147,74 @@ def no_handler(handler_input):
     return handler_input.response_builder.response
 
 
-@sb.request_handler(can_handle_func=lambda input:
-                    currently_playing(input) and
-                    is_intent_name("NumberGuessIntent")(input))
-def number_guess_handler(handler_input):
-    """Handler for processing guess with target."""
+@sb.request_handler(is_intent_name("ChoresIntent")(input))
+def chores_handler(handler_input):
+    """Handler for processing the day modifier, childnames, and chores assignments."""
     # type: (HandlerInput) -> Response
     session_attr = handler_input.attributes_manager.session_attributes
-    target_num = session_attr["guess_number"]
-    guess_num = int(handler_input.request_envelope.request.intent.slots[
-        "number"].value)
+    diff = session_attr["day_difference"]
+    mod_0 = session_attr['day_mod_0']
+    mod_1 = session_attr['day_mod_1']
+    mod_2 = session_attr['day_mod_2']
+    mod_3 = session_attr['day_mod_3']
+    kids_name = int(handler_input.request_envelope.request.intent.slots[
+        "childname"].value)
+    mod = "Error. No input."
 
-    session_attr["no_of_guesses"] += 1
-
-    if guess_num > target_num:
+    if kids_name == "Ethan":
+        day_modifier = (diff + 0) % 4
+        if day_modifier == 0
+            mod = mod_0
+        if day_modifier == 1
+            mod = mod_1
+        if day_modifier == 2
+            mod = mod_2
+        if day_modifier == 3
+            mod = mod_3
         speech_text = (
-            "{} is too high. Try saying a smaller number.".format(guess_num))
-        reprompt = "Try saying a smaller number."
-    elif guess_num < target_num:
+            "Today, Ethan's chores are to {}, clean his room, make his bed, and read for 20 minutes.".format(mod))
+    if kids_name == "Elloise":
+        day_modifier = (diff + 1) % 4
+        if day_modifier == 0
+            mod = mod_0
+        if day_modifier == 1
+            mod = mod_1
+        if day_modifier == 2
+            mod = mod_2
+        if day_modifier == 3
+            mod = mod_3
         speech_text = (
-            "{} is too low. Try saying a larger number.".format(guess_num))
-        reprompt = "Try saying a larger number."
-    elif guess_num == target_num:
+            "Today, Ellie's chores are to {}, clean her room, make her bed, and read for 20 minutes.".format(mod))
+    if kids_name == "Abigail":
+        day_modifier = (diff + 2) % 4
+        if day_modifier == 0
+            mod = mod_0
+        if day_modifier == 1
+            mod = mod_1
+        if day_modifier == 2
+            mod = mod_2
+        if day_modifier == 3
+            mod = mod_3
         speech_text = (
-            "Congratulations. {} is the correct guess. "
-            "You guessed the number in {} guesses. "
-            "Would you like to play a new game?".format(
-                guess_num, session_attr["no_of_guesses"]))
-        reprompt = "Say yes to start a new game or no to end the game"
-        session_attr["games_played"] += 1
-        session_attr["game_state"] = "ENDED"
+            "Today, Abbie's chores are to {}, clean her room, and make her bed.".format(mod))
+    if kids_name == "Genevieve":
+        day_modifier = (diff + 3) % 4
+        if day_modifier == 0
+            mod = mod_0
+        if day_modifier == 1
+            mod = mod_1
+        if day_modifier == 2
+            mod = mod_2
+        if day_modifier == 3
+            mod = mod_3
+        speech_text = (
+            "Today, Jenny's chores are to {}, clean her room, and make her bed.".format(mod))
 
         handler_input.attributes_manager.persistent_attributes = session_attr
         handler_input.attributes_manager.save_persistent_attributes()
     else:
-        speech_text = "Sorry, I didn't get that. Try saying a number."
-        reprompt = "Try saying a number."
+        speech_text = "Sorry, I'm not sure who you're asking about. Try saying a child's name."
+        reprompt = "Whose chores do you want to know?"
 
     handler_input.response_builder.speak(speech_text).ask(reprompt)
     return handler_input.response_builder.response
@@ -240,3 +279,4 @@ def log_response(handler_input, response):
 
 
 lambda_handler = sb.lambda_handler()
+
