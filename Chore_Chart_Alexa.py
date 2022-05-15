@@ -174,17 +174,20 @@ class Short_IntentHandler(AbstractRequestHandler):
         day_modifier = (diff - 1) % 4
 
         if day_modifier == 0:
-            speak_output = (
-            "Ethan's on surprise box. Ellie's on front room. Abbie's on diswasher. Jenny's on table duty."
+            words = (
+            "Ethan's on surprise box. Ellie's on front room. Abbie's on dishwasher. Jenny's on table duty.")
         if day_modifier == 1:
-            speak_output = (
-            "Ethan's on front room. Ellie's on diswasher. Abbie's on table duty. Jenny's on surprise box."
+            words = (
+            "Ethan's on front room. Ellie's on dishwasher. Abbie's on table duty. Jenny's on surprise box.")
         if day_modifier == 2:
-            speak_output = (
-            "Ethan's on diswasher. Ellie's on table duty. Abbie's on surprise box. Jenny's on front room."
+            words = (
+            "Ethan's on dishwasher. Ellie's on table duty. Abbie's on surprise box. Jenny's on front room.")
         if day_modifier == 3:
-            speak_output = (
-            "Ethan's on table duty. Ellie's on surprise box. Abbie's on front room. Jenny's on diswasher."
+            words = (
+            "Ethan's on table duty. Ellie's on surprise box. Abbie's on front room. Jenny's on dishwasher.")
+
+        speak_output = (
+            "{}".format(words))
 
         return (
             handler_input.response_builder
@@ -311,6 +314,7 @@ sb.add_request_handler(Ethan_IntentHandler())
 sb.add_request_handler(Ellie_IntentHandler())
 sb.add_request_handler(Abbie_IntentHandler())
 sb.add_request_handler(Gennie_IntentHandler())
+sb.add_request_handler(Short_IntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
@@ -318,5 +322,3 @@ sb.add_request_handler(SessionEndedRequestHandler())
 sb.add_request_handler(IntentReflectorHandler()) # make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
 
 sb.add_exception_handler(CatchAllExceptionHandler())
-
-lambda_handler = sb.lambda_handler()
