@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK for Python.
-# Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
-# session persistence, api calls, and more.
-# This sample is built using the handler classes approach in skill builder.
 import logging
 import ask_sdk_core.utils as ask_utils
 
@@ -11,6 +5,7 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
+from datetime import date
 
 from ask_sdk_model import Response
 
@@ -27,7 +22,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, you can say Hello or Help. Which would you like to try?"
+        speak_output = "Whose chores?"
 
         return (
             handler_input.response_builder
@@ -36,16 +31,30 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-
-class HelloWorldIntentHandler(AbstractRequestHandler):
+class Ethan_IntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("HelloWorldIntent")(handler_input)
+        return ask_utils.is_intent_name("Ethan_Intent")(handler_input)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Hello World!"
+        original_date = date(2022, 4, 8)
+        today = date.today()
+        diff = (today - original_date).days
+        day_modifier = (diff - 1) % 4
+
+        if day_modifier == 0:
+            mod = "feed the cat, empty the surprise box"
+        if day_modifier == 1:
+            mod = "clean the front room, do an extra chore for Mom"
+        if day_modifier == 2:
+            mod = "unload and load the dishwasher"
+        if day_modifier == 3:
+            mod = "clean the bathroom, set the table, clean the table"
+        
+        speak_output = (
+            "Today, Ethan's chores are to {}, clean his room, make his bed, and read for 20 minutes.".format(mod))
 
         return (
             handler_input.response_builder
@@ -54,6 +63,137 @@ class HelloWorldIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+class Ellie_IntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("Ellie_Intent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        original_date = date(2022, 4, 8)
+        today = date.today()
+        diff = (today - original_date).days
+        day_modifier = (diff - 0) % 4
+
+        if day_modifier == 0:
+            mod = "feed the cat, empty the surprise box"
+        if day_modifier == 1:
+            mod = "clean the front room, do an extra chore for Mom"
+        if day_modifier == 2:
+            mod = "unload and load the dishwasher"
+        if day_modifier == 3:
+            mod = "clean the bathroom, set the table, clean the table"
+        
+        speak_output = (
+            "Today, Ellie's chores are to {}, clean her room, make her bed, and read for 20 minutes.".format(mod))
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class Abbie_IntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("Abbie_Intent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        original_date = date(2022, 4, 8)
+        today = date.today()
+        diff = (today - original_date).days
+        day_modifier = (diff + 1) % 4
+
+        if day_modifier == 0:
+            mod = "feed the cat, empty the surprise box"
+        if day_modifier == 1:
+            mod = "clean the front room, do an extra chore for Mom"
+        if day_modifier == 2:
+            mod = "unload and load the dishwasher"
+        if day_modifier == 3:
+            mod = "clean the bathroom, set the table, clean the table"
+        
+        speak_output = (
+            "Today, Abbie's chores are to {}, clean her room, and make her bed.".format(mod))
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class Gennie_IntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("Gennie_Intent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        original_date = date(2022, 4, 8)
+        today = date.today()
+        diff = (today - original_date).days
+        day_modifier = (diff + 2) % 4
+
+        if day_modifier == 0:
+            mod = "feed the cat, empty the surprise box"
+        if day_modifier == 1:
+            mod = "clean the front room, do an extra chore for Mom"
+        if day_modifier == 2:
+            mod = "unload and load the dishwasher"
+        if day_modifier == 3:
+            mod = "clean the bathroom, set the table, clean the table"
+        
+        speak_output = (
+            "Today, Jenny's chores are to {}, clean her room, and make her bed.".format(mod))
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class Short_IntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("Short_Intent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        original_date = date(2022, 4, 8)
+        today = date.today()
+        diff = (today - original_date).days
+        day_modifier = (diff - 1) % 4
+
+        if day_modifier == 0:
+            words = (
+            "Ethan's on surprise box. Ellie's on front room. Abbie's on dishwasher. Jenny's on table duty.")
+        if day_modifier == 1:
+            words = (
+            "Ethan's on front room. Ellie's on dishwasher. Abbie's on table duty. Jenny's on surprise box.")
+        if day_modifier == 2:
+            words = (
+            "Ethan's on dishwasher. Ellie's on table duty. Abbie's on surprise box. Jenny's on front room.")
+        if day_modifier == 3:
+            words = (
+            "Ethan's on table duty. Ellie's on surprise box. Abbie's on front room. Jenny's on dishwasher.")
+
+        speak_output = (
+            "{}".format(words))
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
@@ -63,7 +203,7 @@ class HelpIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "You can say hello to me! How can I help?"
+        speak_output = "I have a list of chores for you today! Just tell me your name and I'll look them up."
 
         return (
             handler_input.response_builder
@@ -99,8 +239,8 @@ class FallbackIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         logger.info("In FallbackIntentHandler")
-        speech = "Hmm, I'm not sure. You can say Hello or Help. What would you like to do?"
-        reprompt = "I didn't catch that. What can I help you with?"
+        speech = "Hmm, I'm not sure who you said. What lucky child wants to know his or her chores?"
+        reprompt = "I'll check the list again. What was that name?"
 
         return handler_input.response_builder.speak(speech).ask(reprompt).response
 
@@ -163,15 +303,16 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
                 .response
         )
 
-# The SkillBuilder object acts as the entry point for your skill, routing all request and response
-# payloads to the handlers above. Make sure any new handlers or interceptors you've
-# defined are included below. The order matters - they're processed top to bottom.
 
 
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(HelloWorldIntentHandler())
+sb.add_request_handler(Ethan_IntentHandler())
+sb.add_request_handler(Ellie_IntentHandler())
+sb.add_request_handler(Abbie_IntentHandler())
+sb.add_request_handler(Gennie_IntentHandler())
+sb.add_request_handler(Short_IntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
