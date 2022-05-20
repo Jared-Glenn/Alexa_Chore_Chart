@@ -1,4 +1,3 @@
-
 import logging
 import ask_sdk_core.utils as ask_utils
 
@@ -6,12 +5,13 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
-from datetime import date
+from datetime import datetime
 
 from ask_sdk_model import Response
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
@@ -31,7 +31,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-
 class Ethan_IntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
@@ -40,19 +39,22 @@ class Ethan_IntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        original_date = date(2022, 4, 8)
-        today = date.today()
+        date_format = '%m/%d/%Y'
+        original_date = datetime.strptime('4/8/2022', date_format)
+        now = datetime.now()
+        day_b = now.strftime("%m/%d/%Y")
+        today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
         day_modifier = (diff - 1) % 4
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box"
+            mod = "feed the cat, empty the surprise box, clean the table"
         if day_modifier == 1:
             mod = "clean the front room, do an extra chore for Mom"
         if day_modifier == 2:
             mod = "unload and load the dishwasher"
         if day_modifier == 3:
-            mod = "clean the bathroom, set the table, clean the table"
+            mod = "clean the backyard"
         
         speak_output = (
             "Today, Ethan's chores are to {}, clean his room, make his bed, and read for 20 minutes.".format(mod))
@@ -72,19 +74,22 @@ class Ellie_IntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        original_date = date(2022, 4, 8)
-        today = date.today()
+        date_format = '%m/%d/%Y'
+        original_date = datetime.strptime('4/8/2022', date_format)
+        now = datetime.now()
+        day_b = now.strftime("%m/%d/%Y")
+        today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff - 0) % 4
+        day_modifier = (diff + 0) % 4
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box"
+            mod = "feed the cat, empty the surprise box, clean the table"
         if day_modifier == 1:
             mod = "clean the front room, do an extra chore for Mom"
         if day_modifier == 2:
             mod = "unload and load the dishwasher"
         if day_modifier == 3:
-            mod = "clean the bathroom, set the table, clean the table"
+            mod = "clean the backyard"
         
         speak_output = (
             "Today, Ellie's chores are to {}, clean her room, make her bed, and read for 20 minutes.".format(mod))
@@ -104,19 +109,22 @@ class Abbie_IntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        original_date = date(2022, 4, 8)
-        today = date.today()
+        date_format = '%m/%d/%Y'
+        original_date = datetime.strptime('4/8/2022', date_format)
+        now = datetime.now()
+        day_b = now.strftime("%m/%d/%Y")
+        today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
         day_modifier = (diff + 1) % 4
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box"
+            mod = "feed the cat, empty the surprise box, clean the table"
         if day_modifier == 1:
             mod = "clean the front room, do an extra chore for Mom"
         if day_modifier == 2:
             mod = "unload and load the dishwasher"
         if day_modifier == 3:
-            mod = "clean the bathroom, set the table, clean the table"
+            mod = "clean the backyard"
         
         speak_output = (
             "Today, Abbie's chores are to {}, clean her room, and make her bed.".format(mod))
@@ -136,19 +144,22 @@ class Gennie_IntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        original_date = date(2022, 4, 8)
-        today = date.today()
+        date_format = '%m/%d/%Y'
+        original_date = datetime.strptime('4/8/2022', date_format)
+        now = datetime.now()
+        day_b = now.strftime("%m/%d/%Y")
+        today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
         day_modifier = (diff + 2) % 4
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box"
+            mod = "feed the cat, empty the surprise box, clean the table"
         if day_modifier == 1:
             mod = "clean the front room, do an extra chore for Mom"
         if day_modifier == 2:
             mod = "unload and load the dishwasher"
         if day_modifier == 3:
-            mod = "clean the bathroom, set the table, clean the table"
+            mod = "clean the backyard"
         
         speak_output = (
             "Today, Jenny's chores are to {}, clean her room, and make her bed.".format(mod))
@@ -168,23 +179,26 @@ class Short_IntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        original_date = date(2022, 4, 8)
-        today = date.today()
+        date_format = '%m/%d/%Y'
+        original_date = datetime.strptime('4/8/2022', date_format)
+        now = datetime.now()
+        day_b = now.strftime("%m/%d/%Y")
+        today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
         day_modifier = (diff - 1) % 4
 
         if day_modifier == 0:
             words = (
-            "Ethan's on surprise box. Ellie's on front room. Abbie's on dishwasher. Jenny's on table duty.")
+            "Ethan's on table duty, Ellie's got Mom's extra chore, Abbie's on dishwasher, Jenny's on the backyard.")
         if day_modifier == 1:
             words = (
-            "Ethan's on front room. Ellie's on dishwasher. Abbie's on table duty. Jenny's on surprise box.")
+            "Ethan's got Mom's extra chore, Ellie's on dishwasher, Abbie's on the backyard, Jenny's on table duty.")
         if day_modifier == 2:
             words = (
-            "Ethan's on dishwasher. Ellie's on table duty. Abbie's on surprise box. Jenny's on front room.")
+            "Ethan's on dishwasher, Ellie's on the backyard, Abbie's on table duty, Jenny's got Mom's extra chore.")
         if day_modifier == 3:
             words = (
-            "Ethan's on table duty. Ellie's on surprise box. Abbie's on front room. Jenny's on dishwasher.")
+            "Ethan's on the backyard, Ellie's on table duty, Abbie's got Mom's extra chore, Jenny's on dishwasher.")
 
         speak_output = (
             "{}".format(words))
@@ -195,7 +209,6 @@ class Short_IntentHandler(AbstractRequestHandler):
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
-
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
@@ -322,3 +335,5 @@ sb.add_request_handler(SessionEndedRequestHandler())
 sb.add_request_handler(IntentReflectorHandler()) # make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
 
 sb.add_exception_handler(CatchAllExceptionHandler())
+
+lambda_handler = sb.lambda_handler()
