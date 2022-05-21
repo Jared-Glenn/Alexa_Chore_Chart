@@ -5,7 +5,8 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 
 from ask_sdk_model import Response
 
@@ -22,7 +23,10 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Whose chores?"
+        if random.choice([True,True, True, True, True, True, False]):
+            speak_output = "Whose chores?"
+        else:
+            speak_output = "If you want - to know the chores. Name the child - I adores!"
 
         return (
             handler_input.response_builder
@@ -41,11 +45,11 @@ class Ethan_IntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         date_format = '%m/%d/%Y'
         original_date = datetime.strptime('4/8/2022', date_format)
-        now = datetime.now()
+        now = datetime.now() - timedelta(hours=6)
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff - 1) % 4
+        day_modifier = (diff + 0) % 4
 
         if day_modifier == 0:
             mod = "feed the cat, empty the surprise box, clean the table"
@@ -76,11 +80,11 @@ class Ellie_IntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         date_format = '%m/%d/%Y'
         original_date = datetime.strptime('4/8/2022', date_format)
-        now = datetime.now()
+        now = datetime.now() - timedelta(hours=6)
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 0) % 4
+        day_modifier = (diff + 1) % 4
 
         if day_modifier == 0:
             mod = "feed the cat, empty the surprise box, clean the table"
@@ -111,11 +115,11 @@ class Abbie_IntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         date_format = '%m/%d/%Y'
         original_date = datetime.strptime('4/8/2022', date_format)
-        now = datetime.now()
+        now = datetime.now() - timedelta(hours=6)
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 1) % 4
+        day_modifier = (diff + 2) % 4
 
         if day_modifier == 0:
             mod = "feed the cat, empty the surprise box, clean the table"
@@ -146,11 +150,11 @@ class Gennie_IntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         date_format = '%m/%d/%Y'
         original_date = datetime.strptime('4/8/2022', date_format)
-        now = datetime.now()
+        now = datetime.now() - timedelta(hours=6)
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 2) % 4
+        day_modifier = (diff + 3) % 4
 
         if day_modifier == 0:
             mod = "feed the cat, empty the surprise box, clean the table"
@@ -181,11 +185,11 @@ class Short_IntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         date_format = '%m/%d/%Y'
         original_date = datetime.strptime('4/8/2022', date_format)
-        now = datetime.now()
+        now = datetime.now() - timedelta(hours=6)
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff - 1) % 4
+        day_modifier = (diff + 0) % 4
 
         if day_modifier == 0:
             words = (
