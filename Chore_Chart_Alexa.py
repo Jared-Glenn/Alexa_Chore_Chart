@@ -23,10 +23,13 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        if random.choice([True,True, True, True, True, True, False]):
+        if random.choice([True,True, True, True, True, True, True,True, True, True, True, True,True,True, True, True, True, True,True,True, True, True, True, True, False]):
             speak_output = "Whose chores?"
         else:
-            speak_output = "If you want - to know the chores. Name the child - I adores!"
+            if random.choice([True, False]):
+                speak_output = "Chores today for whom?"
+            else:
+                speak_output = "If you want - to know the chores. Name the child - I adores!"
 
         return (
             handler_input.response_builder
