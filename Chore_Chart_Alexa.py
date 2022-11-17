@@ -23,13 +23,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        if random.choice([True,True, True, True, True, True, True,True, True, True, True, True,True,True, True, True, True, True,True,True, True, True, True, True, False]):
-            speak_output = "Whose chores?"
-        else:
-            if random.choice([True, False]):
-                speak_output = "Chores today for whom?"
-            else:
-                speak_output = "If you want - to know the chores. Name the child - I adores!"
+        speak_output = "Whose chores?"
 
         return (
             handler_input.response_builder
@@ -52,19 +46,15 @@ class Ethan_IntentHandler(AbstractRequestHandler):
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 0) % 4
+        day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box, clean the table"
-        if day_modifier == 1:
-            mod = "clean the front room, do an extra chore for Mom"
-        if day_modifier == 2:
             mod = "unload and load the dishwasher"
-        if day_modifier == 3:
-            mod = "clean the backyard"
+        if day_modifier == 1:
+            mod = "handle table duty, empty the litter box, and feed the cat"
         
         speak_output = (
-            "Today, Ethan's chores are to {}, clean his room, make his bed, and read for 20 minutes.".format(mod))
+            "Today, Ethan's chores are to {}. Don't forget to clean your room, make your bed, and read for 20 minutes.".format(mod))
 
         return (
             handler_input.response_builder
@@ -87,19 +77,15 @@ class Ellie_IntentHandler(AbstractRequestHandler):
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 1) % 4
+        day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box, clean the table"
+            mod = "handle table duty, empty the litter box, and feed the cat"
         if day_modifier == 1:
-            mod = "clean the front room, do an extra chore for Mom"
-        if day_modifier == 2:
             mod = "unload and load the dishwasher"
-        if day_modifier == 3:
-            mod = "clean the backyard"
         
         speak_output = (
-            "Today, Ellie's chores are to {}, clean her room, make her bed, and read for 20 minutes.".format(mod))
+            "Today, Ellie's chores are to {}. Don't forget to clean your room, make your bed, and read for 20 minutes.".format(mod))
 
         return (
             handler_input.response_builder
@@ -122,19 +108,15 @@ class Abbie_IntentHandler(AbstractRequestHandler):
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 2) % 4
+        day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box, clean the table"
+            mod = "empty the surprise box, clean the bathrooms, and clean the stairs"
         if day_modifier == 1:
-            mod = "clean the front room, do an extra chore for Mom"
-        if day_modifier == 2:
-            mod = "unload and load the dishwasher"
-        if day_modifier == 3:
-            mod = "clean the backyard"
+            mod = "clean the front room, the hallways, and the kitchen floor"
         
         speak_output = (
-            "Today, Abbie's chores are to {}, clean her room, and make her bed.".format(mod))
+            "Today, Abbie's chores are to {}. Don't forget to clean your room and make your bed.".format(mod))
 
         return (
             handler_input.response_builder
@@ -157,19 +139,15 @@ class Gennie_IntentHandler(AbstractRequestHandler):
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 3) % 4
+        day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "feed the cat, empty the surprise box, clean the table"
+            mod = "clean the front room, the hallways, and the kitchen floor"
         if day_modifier == 1:
-            mod = "clean the front room, do an extra chore for Mom"
-        if day_modifier == 2:
-            mod = "unload and load the dishwasher"
-        if day_modifier == 3:
-            mod = "clean the backyard"
+            mod = "empty the surprise box, clean the bathrooms, and clean the stairs"
         
         speak_output = (
-            "Today, Jenny's chores are to {}, clean her room, and make her bed.".format(mod))
+            "Today, Jenny's chores are to {}. Don't forget to clean your room and make your bed.".format(mod))
 
         return (
             handler_input.response_builder
@@ -192,20 +170,14 @@ class Short_IntentHandler(AbstractRequestHandler):
         day_b = now.strftime("%m/%d/%Y")
         today = datetime.strptime(day_b, date_format)
         diff = (today - original_date).days
-        day_modifier = (diff + 0) % 4
+        day_modifier = diff % 2
 
         if day_modifier == 0:
             words = (
-            "Ethan's on table duty, Ellie's got Mom's extra chore, Abbie's on dishwasher, Jenny's on the backyard.")
+            "Ethan's on diswasher, Ellie's on cat and table duty, Abbie's on surprise box, bathroom, and stairs, Jenny's on the front room, hallways, and kitchen.")
         if day_modifier == 1:
             words = (
-            "Ethan's got Mom's extra chore, Ellie's on dishwasher, Abbie's on the backyard, Jenny's on table duty.")
-        if day_modifier == 2:
-            words = (
-            "Ethan's on dishwasher, Ellie's on the backyard, Abbie's on table duty, Jenny's got Mom's extra chore.")
-        if day_modifier == 3:
-            words = (
-            "Ethan's on the backyard, Ellie's on table duty, Abbie's got Mom's extra chore, Jenny's on dishwasher.")
+            "Ethan's on cat and table duty, Ellie's on diswasher, Abbie's on the front room, hallways, and kitchen, Jenny's on surprise box, bathroom, and stairs.")
 
         speak_output = (
             "{}".format(words))
