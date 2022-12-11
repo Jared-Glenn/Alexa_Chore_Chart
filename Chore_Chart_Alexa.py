@@ -51,10 +51,10 @@ class Ethan_IntentHandler(AbstractRequestHandler):
         if day_modifier == 0:
             mod = "unload and load the dishwasher"
         if day_modifier == 1:
-            mod = "handle table duty, empty the litter box, and feed the cat"
+            mod = "do the walkaround (which is table duty, cat duty, and the surprise box)"
         
         speak_output = (
-            "Today, Ethan's chores are to {}. Don't forget to clean your room, make your bed, and read for 20 minutes.".format(mod))
+            "Today, Ethan's chores are to {}. Don't forget to make your bed, clean your room, make your bed, read for 20 minutes, and make your freaking bed.".format(mod))
 
         return (
             handler_input.response_builder
@@ -80,7 +80,7 @@ class Ellie_IntentHandler(AbstractRequestHandler):
         day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "handle table duty, empty the litter box, and feed the cat"
+            mod = "do the walkaround (which is table duty, cat duty, and the surprise box)"
         if day_modifier == 1:
             mod = "unload and load the dishwasher"
         
@@ -111,12 +111,12 @@ class Abbie_IntentHandler(AbstractRequestHandler):
         day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "empty the surprise box, clean the bathrooms, and clean the stairs"
+            mod = "clean the playroom"
         if day_modifier == 1:
-            mod = "clean the front room, the hallways, and the kitchen floor"
+            mod = "clean the front room"
         
         speak_output = (
-            "Today, Abbie's chores are to {}. Don't forget to clean your room and make your bed.".format(mod))
+            "Today, Abbie's chore is to {}. Don't forget to clean your room and make your bed.".format(mod))
 
         return (
             handler_input.response_builder
@@ -142,12 +142,12 @@ class Gennie_IntentHandler(AbstractRequestHandler):
         day_modifier = diff % 2
 
         if day_modifier == 0:
-            mod = "clean the front room, the hallways, and the kitchen floor"
+            mod = "clean the front room"
         if day_modifier == 1:
-            mod = "empty the surprise box, clean the bathrooms, and clean the stairs"
+            mod = "clean the playroom"
         
         speak_output = (
-            "Today, Jenny's chores are to {}. Don't forget to clean your room and make your bed.".format(mod))
+            "Today, Jenny's chore is to {}. Don't forget to clean your room and make your bed.".format(mod))
 
         return (
             handler_input.response_builder
