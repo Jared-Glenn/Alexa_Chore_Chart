@@ -84,7 +84,7 @@ class Ellie_IntentHandler(AbstractRequestHandler):
             mod = "unload and load the dishwasher"
         
         speak_output = (
-            "Today, Ellie's chores are to {}. Don't forget to clean your room, make your bed, and read for 20 minutes. Oh, and stop messing around and get it done. Like now.".format(mod))
+            "Today, Ellie's chores are to {}. Don't forget you have the capacity to love, clean your room, be super cool, make your bed, be totally tubular-tastic, and read for 20 minutes.".format(mod))
 
         return (
             handler_input.response_builder
